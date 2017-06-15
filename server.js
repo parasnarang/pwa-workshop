@@ -11,7 +11,13 @@ app.get('/manifest.json', function (req, res) {
 	console.log('GET /manifest.json');
 	res.set('Content-Type', 'application/json');
 	res.end(fs.readFileSync(path.resolve(__dirname) + 'manifest.json', 'utf8'));
-})
+});
+
+app.get('/sw.js', function (req, res) {
+	console.log('GET /sw.js');
+	res.set('Content-Type', 'application/javascript');
+	res.end(fs.readFileSync(path.resolve(__dirname) + 'sw.js', 'utf8'));
+});
 
 app.get('/', function (req, res) {
 	console.log('GET /');

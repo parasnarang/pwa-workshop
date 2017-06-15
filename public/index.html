@@ -19,4 +19,15 @@
 
 	</div>
 </body>
+<script type="text/javascript">
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/sw.js').then(function(registeration) {
+			// Registeration was successful
+			console.log('Service Worker registeration successful with scope: ', registeration.scope);
+		}).catch(function(err) {
+			// Registeration failed :(
+			console.log('Service Worker registeration failed: ', err);
+		});
+	}
+</script>
 </html>
