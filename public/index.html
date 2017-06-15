@@ -6,28 +6,49 @@
 	<title>Paras's PWA Reddit App</title>
 	<link rel="manifest" href="/manifest.json" />
 	<link rel="stylesheet" type="text/css" href="/public/styles/shell-styles.css" />
+	<link rel="stylesheet" href="/public/styles/styles.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 </head>
 <body>
-	<div class="content">
+	<div class = "content">
 		<div class="header">Reddit Front Page!</div>
-		<div class="post-placeholder">
-			Placeholder goes here ...
-		</div>
-		<div class="post-placeholder">
-			Placeholder goes here ...
+		<div id="post-content" >
+			<div class="post-placeholder">
+				Placeholder goes here ...
+			</div>
+			<div class="post-placeholder">
+				Placeholder goes here ...
+			</div>
 		</div>
 
 	</div>
+
+	<script src="/public/js/app.js"></script>
+
+	<script id="posts-template" type="x-handlebars-template">
+		<div class="loaded-content">
+			{{#each posts}}
+			<div class="post-container">
+				<div class="post-title">
+					<a href="https://www.reddit.com{{this.data.permalink}}">{{this.data.title}}</a>
+				</div>
+				Author: <span class="post-author">{{this.data.author}} </span>
+			</div>
+			{{/each}}
+		</div>
+	</script>
+
+
+	<script type="text/javascript">
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/sw.js').then(function(registeration) {
+				// Registeration was successful
+				console.log('Service Worker registeration successful with scope: ', registeration.scope);
+			}).catch(function(err) {
+				// Registeration failed :(
+				console.log('Service Worker registeration failed: ', err);
+			});
+		}
+	</script>
 </body>
-<script type="text/javascript">
-	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/sw.js').then(function(registeration) {
-			// Registeration was successful
-			console.log('Service Worker registeration successful with scope: ', registeration.scope);
-		}).catch(function(err) {
-			// Registeration failed :(
-			console.log('Service Worker registeration failed: ', err);
-		});
-	}
-</script>
 </html>
