@@ -5,8 +5,11 @@ var path = require('path');
 
 var port = process.env.PORT || 3000;
 
+app.use(express.static(path.join(__dirname)));
+
 app.get('/', function (req, res) {
-	res.send('Hello World!')
+	console.log('GET / Requested');
+	res.type('html').sendFile(path.join(__dirname, '/public/') + 'index.html');
 });
 
 app.listen(port, function () {
